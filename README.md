@@ -9,7 +9,6 @@ The service validates the following inputs:
 * Room must be bigger than 0 units on both axis
 * Coordinates cannot be negative
 * Coordinates must be within room
-* Instructions must not allow robot to leave the room
 
 example error response: 
 ```JSON
