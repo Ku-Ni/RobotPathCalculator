@@ -14,7 +14,7 @@ public class CalculateResultsImpl implements CalculateResults{
 
 	@Override
 	public Response processInput(Request request) throws IllegalArgumentException {
-		Robot robot = new Robot(request.getStartPosition());
+		Robot robot = new Robot(request.getStartPosition(), request.getRoomSize());
 
 		// Handle instance where start location is on a patch
 		if (request.getPatches().contains(robot.getLocation()))
@@ -41,12 +41,7 @@ public class CalculateResultsImpl implements CalculateResults{
 			}
 			
 			logger.debug("Robot location: {}", robot.getLocation());
-			
-			// Validate robot still in room
-			if (robot.getX() < 0 || robot.getX() >= request.getRoomSize().getX() ||
-					robot.getY() < 0 || robot.getY() >= request.getRoomSize().getY())
-				throw new IllegalArgumentException("Instructions moved robot out of room");
-			
+						
 			// Check if robot is on patch
 			if (request.getPatches().contains(robot.getLocation())) {
 				logger.debug("Patches {} contains {}", request.getPatches(), robot.getLocation());
